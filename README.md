@@ -123,6 +123,17 @@ There are no lint or type checks implemented.
 
 A MCP Client is what allows us to access the functionality that's implemented in the MCP Server.
 
+### The benefits
+
+MCP (Model Context Protocol) servers are designed specifically for AI agent interactions, offering dynamic tool discovery, stateful context management, and standardized communication, which provides significant advantages over simply building rigid, hard-coded API calls to an LLM like Claude. Traditional APIs are generally stateless and built for human developers to integrate applications, while MCP enables more autonomous and flexible AI workflows.
+
+- Dynamic Tool Discovery: AI agents can find available tools and their descriptions by querying an MCP server. This allows them to adapt to new capabilities. Developers do not need to write custom integration code for each function or update hardcoded endpoints.
+- Stateful Context Management: MCP maintains session-level context, unlike stateless APIs. This allows AI agents to engage in ongoing, multi-step "conversations" and workflows. Agents can build a richer understanding of a task across multiple interactions.
+- AI-Friendly Format: MCP servers provide information, including error messages and tool descriptions, in a structured, AI-friendly format. The language model can easily interpret this and act upon it. This reduces hallucinations and the need for complex prompt engineering.
+- Enhanced Agent Autonomy: MCP is built for AI agents, allowing them to iteratively call tools, analyze results, and decide on the next steps in a loop. This enables more complex and dynamic agentic behavior.
+Standardization: MCP is an open standard. Tools built on the protocol can be used across any MCP-compatible LLM client (e.g., Claude, GPT, Gemini). This avoids vendor lock-in and promotes consistency across different AI platforms.
+- Improved Security Model: The AI model never directly sees API keys or sensitive URLs in an MCP setup. The MCP server acts as a controlled intermediary. Developers can implement security, validation, and monitoring over what the agent can access or do.
+
 ### MCP Server Primitives
 
 1. Tools: model-controlled - Claude decides when to call these - results are used by Claude.
