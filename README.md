@@ -95,6 +95,15 @@ Commands will auto-complete when you press Tab.
 
 ## Development
 
+### Testing Tools
+
+Start the MCP Server:
+```bash
+mcp dev mcp_server.py
+```
+
+Then navigate to localhost:6277 in a browser to access the MCP Inspector tool.
+
 ### Adding New Documents
 
 Edit the `mcp_server.py` file to add new documents to the `docs` dictionary.
@@ -109,3 +118,34 @@ To fully implement the MCP features:
 ### Linting and Typing Check
 
 There are no lint or type checks implemented.
+
+## Notes from course
+
+A MCP Client is what allows us to access the functionality that's implemented in the MCP Server.
+
+### MCP Server Primitives
+
+1. Tools: model-controlled - Claude decides when to call these - results are used by Claude.
+2. Resources: app-controlled - our app decides when to call these - results are primarily used by our app.
+3. Prompts: user-controlled - the user decides when to use these
+
+### Tools versus Resources
+
+**Tools** are for actions — the LLM decides to call them with parameters it chooses. They can have side effects (e.g. editing a document, calling an API). Think of them like function calls where the model is taking an action.
+
+**Resources** are for data access — identified by a URI, meant to be read-only. The client (not the LLM) typically fetches these to attach context before a conversation starts.
+
+| Situation | Use |
+|---|---|
+| LLM needs to *do* something (search, write, call an API) | Tool |
+| LLM needs information it can *act on* | Tool |
+| Client wants to pre-load context into a conversation | Resource |
+| You're exposing a catalog or static data structure | Resource |
+
+### Prompts
+
+If you always leave prompts totally to the user, they might get back decent results but user might have more luck if they use our thoroughly-eval'd prompt instead!
+
+Adding prompts to your MCP Server will expose these to any client using the server. 
+
+
